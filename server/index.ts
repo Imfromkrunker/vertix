@@ -74,9 +74,9 @@ io.on("connection", (socket: Socket) => {
 					//tiles: []
 				},
 
-				//these need to be fine tuned
-				maxScreenWidth: 1000,
-				maxScreenHeight: 1000,
+				//probably just this tbh
+				maxScreenWidth: 1920,
+				maxScreenHeight: 1080,
 				viewMult: 1,
 				tileScale: 64,
 
