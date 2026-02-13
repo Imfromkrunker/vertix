@@ -1345,7 +1345,6 @@ function setupSocket(a) {
     player.classIndex = playerClassIndex;
     b.name = player.name;
     b.classIndex = playerClassIndex;
-    console.log("gotit", b, d);
     a.emit("gotit", b, d, Date.now(), false);
     player.dead = true;
     if (d) {
@@ -2943,7 +2942,7 @@ function updateGameLoop() {
   oldTime = currentTime;
   horizontalDT = verticalDT = 0;
   count++;
-  var a = 0;
+  //var a = 0; unused?
   if (keys.u == 1) {
     verticalDT = -1;
     temp = 0;
@@ -3023,7 +3022,7 @@ function updateGameLoop() {
             vdt: verticalDT / 2,
             ts: currentTime,
             isn: inputNumber,
-            s: a,
+            //s: a,
           };
           inputNumber++;
           socket.emit("4", sendData);
@@ -4891,11 +4890,12 @@ function setModInfoText(a) {
 var fileFormat = "";
 window.loadModPack = loadModPack;
 function loadModPack(a, b) {
-  //work around
+  //TODO fix reader.GetEntries
+  spriteIndex = 0;
   loadPlayerSprites("/images/sprites/");
   loadDefaultSprites("/images/sprites/");
   try {
-    if (loadingTexturePack) { //originally !loadingTexturePack
+    if (!loadingTexturePack) {
       function d() {
         this.numFiles;
         this.progress;
@@ -6093,7 +6093,7 @@ function drawSprite(a, b, d, e, f, h, g, l, m, k, p) {
     if (l && showShadows) {
       a.globalAlpha = 1;
       a.translate(0, m);
-      tmpShadow = getCachedShadow(b, f, h + p, k);
+      //tmpShadow = getCachedShadow(b, f, h + p, k);
       if (tmpShadow != null && tmpShadow != undefined) {
         a.drawImage(tmpShadow, d, e + h);
       }
