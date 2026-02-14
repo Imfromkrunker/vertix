@@ -50,6 +50,8 @@ io.on("connection", (socket: Socket) => {
 		score: 0,
 		angle: 0,
 		frameCountdown: 0,
+		height: 128,
+		width: 64,
 	};
 	players[socket.id] = player;
 
@@ -100,7 +102,7 @@ io.on("connection", (socket: Socket) => {
 
 			maxScreenWidth: 1920,
 			maxScreenHeight: 1080,
-			viewMult: 2,
+			viewMult: 1.5,
 			tileScale: 256,
 
 			usersInRoom: [],
@@ -121,6 +123,9 @@ io.on("connection", (socket: Socket) => {
 	//socket.emit("jum", {}) //otherJump
 
 	//TODO: socket.on stuff
+	socket.on("0", (targetF) => { //aim assist?
+		//console.log(targetF)
+	});
 	socket.on("1", (x, y, jumpY, targetF, targetD, currentTime) => {
 		//console.log("1", x, y, jumpY, targetF, targetD, currentTime);
 	});

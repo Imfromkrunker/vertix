@@ -3265,11 +3265,10 @@ function doGame(a) {
   updateBullets(a);
   updateParticles(a, 1);
   drawMap(2);
-  // drawPlayerNames();
-  // :(
-  // drawEdgeShader();
+  drawPlayerNames();
+  drawEdgeShader();
   drawGameLights(a);
-  // updateAnimTexts(a);
+  updateAnimTexts(a);
   updateNotifications(a);
   drawUI();
   drawMiniMapCounter--;
@@ -3876,8 +3875,8 @@ function getSprite(a) {
     console.log("File not Found: " + a + ".png");
   };
   try {
-    //tmpPicture = localStorage.getItem(a + ".png");
-    //b.src = tmpPicture;
+    tmpPicture = localStorage.getItem(a + ".png");
+    b.src = tmpPicture;
     b.crossOrigin = 'anonymous';
     b.src = a + ".png";
   } catch (d) {
@@ -6093,7 +6092,7 @@ function drawSprite(a, b, d, e, f, h, g, l, m, k, p) {
     if (l && showShadows) {
       a.globalAlpha = 1;
       a.translate(0, m);
-      //tmpShadow = getCachedShadow(b, f, h + p, k);
+      tmpShadow = getCachedShadow(b, f, h + p, k);
       if (tmpShadow != null && tmpShadow != undefined) {
         a.drawImage(tmpShadow, d, e + h);
       }
