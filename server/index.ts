@@ -36,22 +36,35 @@ let players = {};
 io.on("connection", (socket: Socket) => {
 	console.log("con", socket.id);
 
+	let testWep = {
+		weaponIndex: 0,
+		ammo: 30,
+		width: 28,
+		length: 84,
+		yOffset: 46,
+		fireRate: 20,
+		lastShot: 0,
+		holdDist: 0,
+		maxAmmo: 30,
+		reloadTime: 10
+	}
+
 	let player = {
 		index: lastPlayerID++,
 		name: "Sidney",
 		type: "player",
 		team: "blue",
-		weapons: [{ weaponIndex: 0, ammo: 30 }],
+		weapons: [ testWep ],
 		dead: true,
-		speed: 1,
+		speed: 0.5,
 		classIndex: 0,
 		currentWeapon: 0,
 		health: 100,
 		score: 0,
 		angle: 0,
 		frameCountdown: 0,
-		height: 128,
-		width: 64,
+		height: 84,
+		width: 42,
 	};
 	players[socket.id] = player;
 
@@ -62,7 +75,7 @@ io.on("connection", (socket: Socket) => {
 
 	socket.conn.on("packet", ({ type, data }) => {
 		if (data?.includes("ping1") || data?.includes("hdt") || data?.includes('2["0",')) return;
-		console.log(data);
+		console.log(type, data);
 	});
 
 	socket.on("cht", (msg, type) => {
@@ -83,8 +96,6 @@ io.on("connection", (socket: Socket) => {
 	socket.on("respawn", () => {
 		player.dead = false;
 		player.health = 100;
-		player.weapons = [{ weaponIndex: 0, ammo: 30 }];
-		player.currentWeapon = 0;
 		player.angle = 0;
 
 		const gameSetup = {
@@ -102,8 +113,8 @@ io.on("connection", (socket: Socket) => {
 
 			maxScreenWidth: 1920,
 			maxScreenHeight: 1080,
-			viewMult: 1.5,
-			tileScale: 256,
+			viewMult: 0.75,
+			tileScale: 128,
 
 			usersInRoom: [],
 			you: { ...player }
