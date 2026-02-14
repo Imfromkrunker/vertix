@@ -2942,7 +2942,7 @@ function updateGameLoop() {
   oldTime = currentTime;
   horizontalDT = verticalDT = 0;
   count++;
-  //var a = 0; unused?
+  var a = 0;
   if (keys.u == 1) {
     verticalDT = -1;
     temp = 0;
@@ -3022,7 +3022,7 @@ function updateGameLoop() {
             vdt: verticalDT / 2,
             ts: currentTime,
             isn: inputNumber,
-            //s: a,
+            s: a,
           };
           inputNumber++;
           socket.emit("4", sendData);
